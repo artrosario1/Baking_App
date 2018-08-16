@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.IngredientsActivity"
+    android:background="@color/colorPrimaryDark"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frame_ingredients"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            android:id="@+id/tv_ingredientsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="4dp"
+            android:text="Ingredients: "
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/ingredientsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+    </FrameLayout>
+
+    <FrameLayout
+    android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frame_steps"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            android:id="@+id/tv_StepsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="Steps: "
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/stepsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+    </FrameLayout>
+</LinearLayout>
