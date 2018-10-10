@@ -4,9 +4,12 @@ import android.graphics.Movie;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Recipe implements Parcelable{
@@ -107,7 +110,14 @@ public class Recipe implements Parcelable{
         this.stepList = stepList;
     }
 
+    public String convert() {
+        return new Gson().toJson(this);
+    }
 
+    public static Recipe convertBack(String recipeString) {
+        Type type = new TypeToken<Recipe>(){}.getType();
+        return new Gson().fromJson(recipeString, type);
+    }
 
     @Override
     public int describeContents() {

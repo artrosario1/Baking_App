@@ -11,12 +11,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/scrollView">
+
             <FrameLayout
                 android:id="@+id/videoStepsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent">
-            </FrameLayout>
+                app:layout_constraintTop_toTopOf="parent"></FrameLayout>
         </ScrollView>
 
     <Button

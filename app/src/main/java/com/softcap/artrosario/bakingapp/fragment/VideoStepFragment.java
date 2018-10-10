@@ -1,7 +1,10 @@
 package com.softcap.artrosario.bakingapp.fragment;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -29,6 +33,7 @@ import com.google.android.exoplayer2.util.Util;
 import com.softcap.artrosario.bakingapp.R;
 import com.softcap.artrosario.bakingapp.model.Step;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class VideoStepFragment extends Fragment {
@@ -37,6 +42,7 @@ public class VideoStepFragment extends Fragment {
     private SimpleExoPlayer simpleExoPlayer;
     private PlayerView mPlayerView;
     private TextView mStepDescription;
+    private ImageView mThumbnail;
     private int currentWindow;
     private long playbackPosition;
     private boolean playWhenReady = true;
@@ -59,6 +65,7 @@ public class VideoStepFragment extends Fragment {
         mPlayerView = rootView.findViewById(R.id.exoPlayerView);
         mStepDescription = rootView.findViewById(R.id.tv_step_long_desc);
         previousButton = getActivity().findViewById(R.id.previousButton);
+        mThumbnail = getActivity().findViewById(R.id.iv_thumbnail);
         nextButton = getActivity().findViewById(R.id.nextButton);
         steps = getActivity().getIntent().getParcelableArrayListExtra("stepsArray");
 
@@ -75,6 +82,8 @@ public class VideoStepFragment extends Fragment {
                 previousButton.setVisibility(View.VISIBLE);
                 nextButton.setVisibility(View.VISIBLE);
             }
+
+
         }
         else {
             thisStep = getActivity().getIntent().getParcelableExtra("ThisStep");
@@ -94,14 +103,12 @@ public class VideoStepFragment extends Fragment {
         if(savedInstanceState != null) {
           currentWindow = savedInstanceState.getInt("window");
           playbackPosition = savedInstanceState.getLong("playback");
-            Log.d("playbackGet", Long.toString(playbackPosition));
           playWhenReady = savedInstanceState.getBoolean("playWhenReady");
           initializePlayer(thisStep.videoURL);
-      }
-      else{
+        }
+        else{
           initializePlayer(thisStep.videoURL);
-      }
-
+        }
         return rootView;
     }
     private void initializePlayer(String videoURL){
@@ -110,22 +117,22 @@ public class VideoStepFragment extends Fragment {
                     new DefaultRenderersFactory(getContext()),
                     new DefaultTrackSelector(), new DefaultLoadControl()
             );
-
             mPlayerView.setPlayer(simpleExoPlayer);
 
             simpleExoPlayer.setPlayWhenReady(playWhenReady);
-            Log.d("playbackIs", Long.toString(playbackPosition));
             simpleExoPlayer.seekTo(currentWindow, playbackPosition);
 
             Uri uri = Uri.parse(videoURL);
             if(videoURL.isEmpty()){
                 mPlayerView.setVisibility(View.GONE);
-                //TODO: set thumbnail image
+                //mThumbnail.setVisibility(View.VISIBLE);
+                //mThumbnail.setImageResource(R.drawable.cheesecake);
+
 
             }else {
-
                 MediaSource mediaSource = buildMediaSource(uri);
                 simpleExoPlayer.prepare(mediaSource, false, false);
+
             }
         }
     }
@@ -174,7 +181,6 @@ public class VideoStepFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         releasePlayer();
         outState.putLong("playback", playbackPosition);
-        Log.d("playbackOut", Long.toString(playbackPosition));
         outState.putInt("window",currentWindow);
         outState.putBoolean("playWhenReady", playWhenReady);
         super.onSaveInstanceState(outState);
@@ -190,4 +196,29 @@ public class VideoStepFragment extends Fragment {
         }
     }
 
+    private class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView imageView;
+
+        public DownloadImage(ImageView imageView) {
+            this.imageView = imageView;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            String url = strings[0];
+            Bitmap bitmap = null;
+            try {
+                InputStream in = new java.net.URL(url).openStream();
+                bitmap = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
+    }
 }

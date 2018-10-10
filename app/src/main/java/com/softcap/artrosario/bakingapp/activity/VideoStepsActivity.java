@@ -86,7 +86,6 @@ public class VideoStepsActivity extends FragmentActivity {
 
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -1,19 +1,15 @@
 package com.softcap.artrosario.bakingapp.activity;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -27,12 +23,9 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.softcap.artrosario.bakingapp.R;
 import com.softcap.artrosario.bakingapp.adapter.IngredientsAdapter;
-import com.softcap.artrosario.bakingapp.adapter.RecipeCardAdapter;
-import com.softcap.artrosario.bakingapp.adapter.StepsAdapter;
 import com.softcap.artrosario.bakingapp.fragment.IngredientsFragment;
-import com.softcap.artrosario.bakingapp.fragment.RecipeCardFragment;
 import com.softcap.artrosario.bakingapp.fragment.StepsFragment;
-import com.softcap.artrosario.bakingapp.fragment.VideoStepFragment;
+import com.softcap.artrosario.bakingapp.widget.listViewsService;
 import com.softcap.artrosario.bakingapp.model.Ingredient;
 import com.softcap.artrosario.bakingapp.model.Recipe;
 import com.softcap.artrosario.bakingapp.model.Step;
@@ -44,6 +37,7 @@ public class IngredientsActivity extends AppCompatActivity{
 
     List<Ingredient> ingredients = new ArrayList<>();
     private ArrayList<Step> steps = new ArrayList<>();
+    private Ingredient[] ingredientsArray;
     Context mContext;
     private Recipe thisRecipe;
     private boolean mTwoPane;
@@ -68,9 +62,6 @@ public class IngredientsActivity extends AppCompatActivity{
             mStepDescription = findViewById(R.id.tv_step_long_desc2);
             mPlayerView = findViewById(R.id.exoPlayerView2);
 
-
-
-
         }else{
             mTwoPane = false;
 
@@ -84,7 +75,7 @@ public class IngredientsActivity extends AppCompatActivity{
                         .commit();
             }
         }
-        Log.d("twoPaneIngredients", Boolean.toString(mTwoPane));
+        listViewsService.updateWidget(this, thisRecipe);
     }
     public boolean isTwoPane(){
         mTwoPane = findViewById(R.id.LinearLayoutIngredientsAndSteps) != null;
@@ -146,7 +137,7 @@ public class IngredientsActivity extends AppCompatActivity{
     public void onSaveInstanceState(@NonNull Bundle outState) {
         releasePlayer();
         outState.putLong("playback", playbackPosition);
-        Log.d("playbackOut", Long.toString(playbackPosition));
+
         outState.putInt("window",currentWindow);
         outState.putBoolean("playWhenReady", playWhenReady);
         super.onSaveInstanceState(outState);

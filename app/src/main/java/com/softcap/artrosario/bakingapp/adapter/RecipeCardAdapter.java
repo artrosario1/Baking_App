@@ -26,7 +26,6 @@ public class RecipeCardAdapter extends RecyclerView.Adapter<RecipeCardAdapter.Re
     int[] recipeImages = {R.drawable.nutella_pie, R.drawable.brownie, R.drawable.yellow_cake, R.drawable.cheesecake};
     private final int rowLayout;
     private final Context mContext;
-    private static final String URL_BASE_PATH = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/";
     private final RecipeCardClickHandler mClickHandler;
 
 
@@ -51,7 +50,6 @@ public class RecipeCardAdapter extends RecyclerView.Adapter<RecipeCardAdapter.Re
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         String thisRecipeName = recipes.get(position).getRecipeName();
-        Log.d("NAME",thisRecipeName);
         holder.recipeName.setText(thisRecipeName);
         holder.recipeImage.setImageResource(recipeImages[position]);
 

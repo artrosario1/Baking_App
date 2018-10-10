@@ -65,7 +65,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
             int adapterPosition = getAdapterPosition();
             Step thisStep = stepList.get(adapterPosition);
             mStepHandler.onStepClick(v, thisStep);
- ;
+
         }
     }
 }

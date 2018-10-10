@@ -43,8 +43,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         holder.ingredientName.setText(ingredientName);
         holder.ingredientQuantity.setText(ingredientQuantity);
         holder.ingredientMeasure.setText(ingredientMeasure);
-        Log.d("SIZE", Integer.toString(ingredientList.size()));
-
     }
 
     @Override

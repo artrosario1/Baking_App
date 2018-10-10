@@ -27,6 +27,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:paddingLeft="4dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHighlight="@color/colorPrimaryDark"
+                    android:buttonTint="@color/colorPrimaryDark"
                     />
                 <TextView
                     android:id="@+id/tv_ingredientQuanity"

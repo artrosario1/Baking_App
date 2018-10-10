@@ -23,6 +23,7 @@ public class Ingredient implements Parcelable {
     public String measure;
     @SerializedName("ingredient")
     public String ingredientName;
+    public String mIngredient;
 
     public Ingredient(String quantity, String measure, String ingredientName) {
         this.quantity = quantity;
@@ -58,6 +59,10 @@ public class Ingredient implements Parcelable {
 
     public void setIngredientName(String ingredientName) {
         this.ingredientName = ingredientName;
+    }
+
+    public String getIngredient(){
+        return mIngredient;
     }
 
     @Override

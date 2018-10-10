@@ -41,10 +41,7 @@ import java.util.List;
 
 public class StepsFragment extends Fragment implements StepsAdapter.StepClickHandler {
     private Recipe thisRecipe;
-    private Step thisStep;
     private ArrayList<Step> steps = new ArrayList<>();
-    private List<Integer> mStepIds;
-    private int mStepIndex;
     private StepsAdapter.StepClickHandler mStepClickHandler;
     boolean isTwoPane;
 
@@ -100,13 +97,6 @@ public class StepsFragment extends Fragment implements StepsAdapter.StepClickHan
             intent.putExtra("stepsArray", steps);
             startActivity(intent);
         }
-    }
-
-    public void setStepIds(List<Integer> stepIds){
-        mStepIds = stepIds;
-    }
-    public void setListIndex(int stepIndex){
-        mStepIndex = stepIndex;
     }
 
 
