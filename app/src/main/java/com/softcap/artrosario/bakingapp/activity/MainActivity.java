@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.softcap.artrosario.bakingapp.R;
+import com.softcap.artrosario.bakingapp.*;
 import com.softcap.artrosario.bakingapp.adapter.RecipeCardAdapter;
 import com.softcap.artrosario.bakingapp.model.Ingredient;
 import com.softcap.artrosario.bakingapp.model.Recipe;
